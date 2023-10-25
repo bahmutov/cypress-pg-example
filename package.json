@@ -1,0 +1,32 @@
+{
+  "name": "cypress-pg-example",
+  "version": "1.0.0",
+  "description": "Using Postgres database from your Cypress tests example",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "start": "node ./src/server.mjs",
+    "badges": "npx -p dependency-version-badge update-badge cypress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahmutov/cypress-pg-example.git"
+  },
+  "keywords": [
+    "cypress-example"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahmutov/cypress-pg-example/issues"
+  },
+  "homepage": "https://github.com/bahmutov/cypress-pg-example#readme",
+  "devDependencies": {
+    "cypress": "^13.3.3",
+    "prettier": "^3.0.3"
+  },
+  "dependencies": {
+    "fastify": "^4.24.3",
+    "pg": "^8.11.3"
+  }
+}
