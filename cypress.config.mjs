@@ -16,17 +16,12 @@ export default defineConfig({
         async clearMessages() {
           console.log('clearMessages')
           // TODO: clear the "messages" table using the client.query method
-          await client.query('TRUNCATE TABLE messages')
           // cy.task callback must return except an undefined
           return null
         },
         async getMessages() {
           // TODO: return all messages from the database
-          const res = await client.query('SELECT message FROM messages')
           // only return the message strings
-          const messages = res.rows.map((o) => o.message)
-          console.log('db has %d messages', messages.length)
-          return messages
         },
       })
     },
