@@ -13,20 +13,25 @@ export default defineConfig({
       const client = await initDatabase()
 
       on('task', {
-        async clearMessages() {
-          console.log('clearMessages')
-          // TODO: clear the "messages" table using the client.query method
-          await client.query('TRUNCATE TABLE messages')
-          // cy.task callback must return except an undefined
-          return null
-        },
-        async getMessages() {
-          // TODO: return all messages from the database
-          const res = await client.query('SELECT message FROM messages')
-          // only return the message strings
-          const messages = res.rows.map((o) => o.message)
-          console.log('db has %d messages', messages.length)
-          return messages
+        // task that can run simple string queries
+        // like cy.task('query', 'truncate ...')
+        // or queries with params
+        // like cy.task('query', {
+        //    query: 'insert into ... $1, $2',
+        //    params: [.., ...]
+        // })
+        async query(options) {
+          let query
+          let params
+          if (typeof options === 'string') {
+            query = options
+          } else {
+            query = options.query
+            params = options.params
+          }
+          console.log('running query "%s"', query)
+          const res = await client.query(query, params)
+          return res.rows
         },
       })
     },
