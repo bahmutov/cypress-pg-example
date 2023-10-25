@@ -1,4 +1,4 @@
-# cypress-pg-example [![ci](https://github.com/bahmutov/cypress-pg-example/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bahmutov/cypress-pg-example/actions/workflows/ci.yml) ![cypress version](https://img.shields.io/badge/cypress-13.3.3-brightgreen)
+# cypress-pg-example ![cypress version](https://img.shields.io/badge/cypress-13.3.3-brightgreen)
 
 > Using Postgres database from your Cypress tests example
 
