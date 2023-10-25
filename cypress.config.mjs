@@ -9,21 +9,24 @@ export default defineConfig({
     baseUrl: 'http://localhost:3050',
     supportFile: false,
     fixturesFolder: false,
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-      // and load any plugins that require the Node environment
-      const db = initDatabase()
+    async setupNodeEvents(on, config) {
+      const client = await initDatabase()
 
       on('task', {
         async clearMessages() {
           console.log('clearMessages')
-          db.data.messages.length = 0
-          await db.write()
-          // cy.task callback must return anything
-          // but undefined
+          await client.query('TRUNCATE TABLE messages')
+          // cy.task callback must return except an undefined
           return null
         },
-        async getMessages() {},
+        async getMessages() {
+          // return all messages from the database
+          const res = await client.query('SELECT message FROM messages')
+          // only return the message strings
+          const messages = res.rows.map((o) => o.message)
+          console.log('db has %d messages', messages.length)
+          return messages
+        },
       })
     },
   },

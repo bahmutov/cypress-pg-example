@@ -4,6 +4,10 @@
 
 - Server using [Fastify](https://fastify.dev/)
 
+## Setup
+
+You wil need to set up the database once by creating table `messages` inside the `test_db` database running locally using Docker compose. The database is persisted to the local folder "data". Make sure the local Docker app is running.
+
 How to start the database and create the initial table
 
 ```bash
@@ -21,6 +25,18 @@ $ exit
 # exit the database container
 $ exit
 ```
+
+## Run the server
+
+Now that the `local-postgres` container is running and has the table `messages`, let's start our server from [src/server.mjs](./src/server.mjs)
+
+```bash
+$ npm start
+```
+
+## Open Cypress
+
+You can find an example test in the `cypress/e2e/spec.cy.js` file. The test can query the database by calling the tasks defined in the [cypress.config.mjs](./cypress.config.mjs) file.
 
 ## Small print
 
