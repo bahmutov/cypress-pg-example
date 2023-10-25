@@ -4,6 +4,11 @@
 
 - Server using [Fastify](https://fastify.dev/)
 
+🎓 This example is used in my course [Cypress Plugins](https://cypress.tips/courses/cypress-plugins)
+
+- [Lesson o5: Work with Postgres database](https://cypress.tips/courses/cypress-plugins/lessons/o5)
+- [Lesson o6: Write a flexible task to query the database](https://cypress.tips/courses/cypress-plugins/lessons/o6)
+
 ## Setup
 
 You wil need to set up the database once by creating table `messages` inside the `test_db` database running locally using Docker compose. The database is persisted to the local folder "data". Make sure the local Docker app is running.
