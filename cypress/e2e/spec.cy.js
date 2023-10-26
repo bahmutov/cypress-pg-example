@@ -3,10 +3,10 @@
 describe('Postgres database', () => {
   beforeEach(() => {
     // delete all existing messages
-    // by calling task "query"
+    // by calling custom command cy.query
     // with the string argument
     // "truncate table messages"
-    cy.task('query', 'truncate table messages')
+    cy.query('truncate table messages')
   })
 
   it('adds a new message', () => {
@@ -21,7 +21,7 @@ describe('Postgres database', () => {
     // and confirm the list includes the new message
     // use the query "select message from messages"
     // which should return a list like [ {message: }, {message: }, ...]
-    cy.task('query', 'select message from messages').should('deep.include', {
+    cy.query('select message from messages').should('deep.include', {
       message,
     })
     // select only the message equal to the given random message
@@ -29,9 +29,8 @@ describe('Postgres database', () => {
     // you will need to pass both the query
     // "select message from messages where message = $1"
     // and its params [message]
-    cy.task('query', {
-      query: 'select message from messages where message = $1',
-      params: [message],
-    }).should('deep.equal', [{ message }])
+    cy.query('select message from messages where message = $1', [
+      message,
+    ]).should('deep.equal', [{ message }])
   })
 })

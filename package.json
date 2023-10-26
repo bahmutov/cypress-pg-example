@@ -23,7 +23,8 @@
   "homepage": "https://github.com/bahmutov/cypress-pg-example#readme",
   "devDependencies": {
     "cypress": "^13.3.3",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "fastify": "^4.24.3",
