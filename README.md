@@ -8,6 +8,7 @@
 
 - [Lesson o5: Work with Postgres database](https://cypress.tips/courses/cypress-plugins/lessons/o5)
 - [Lesson o6: Write a flexible task to query the database](https://cypress.tips/courses/cypress-plugins/lessons/o6)
+- [Lesson o7: Add a custom query command](https://cypress.tips/courses/cypress-plugins/lessons/o7)
 
 ## Setup
 
