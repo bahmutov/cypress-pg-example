@@ -7,7 +7,6 @@ export default defineConfig({
   e2e: {
     // baseUrl, etc
     baseUrl: 'http://localhost:3050',
-    supportFile: false,
     fixturesFolder: false,
     async setupNodeEvents(on, config) {
       const client = await initDatabase()
