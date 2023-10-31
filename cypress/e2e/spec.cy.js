@@ -3,27 +3,21 @@
 describe('Postgres database', () => {
   beforeEach(() => {
     // delete all existing messages
-    // by calling custom command cy.query
-    // with the string argument
-    // "truncate table messages"
-    cy.query('truncate table messages')
+    // using task "clearMessages"
+    cy.task('clearMessages')
   })
 
   it('confirms the number of messages', () => {
     // confirm the messages table haz zero records
-    // tip: PG Count(*) function returns a single row
-    // with {count: "N"} object
-    cy.query('select count(*) from messages').should('deep.equal', [
-      { count: '0' },
-    ])
+    // by calling the task "countMessages"
+    cy.task('countMessages').should('equal', 0)
     // insert 5 random messages into the table
-    // using SQL queries
+    // using api calls and cy.request command
+    // POST /messages { message: '...' }
     Cypress._.times(5, (k) => {
-      cy.query('insert into messages values ($1)', [`message ${k + 1}`])
+      cy.request('POST', '/messages', { message: `message ${k + 1}` })
     })
     // confirm there are 5 messages in the table
-    cy.query('select count(*) from messages')
-      .its('0.count')
-      .should('equal', '5')
+    cy.task('countMessages').should('equal', 5)
   })
 })

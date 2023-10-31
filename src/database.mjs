@@ -1,5 +1,4 @@
-import pkg from 'pg'
-const { Client } = pkg
+import { Sequelize } from 'sequelize'
 
 // in the real use case, these variables
 // would come from the environment variables
@@ -12,7 +11,24 @@ const connectionInfo = {
 }
 
 export async function initDatabase() {
-  const client = new Client(connectionInfo)
-  await client.connect()
-  return client
+  const sequelize = new Sequelize(
+    connectionInfo.database,
+    connectionInfo.user,
+    connectionInfo.password,
+    {
+      host: connectionInfo.host,
+      dialect: 'postgres',
+    },
+  )
+
+  // connects to the database
+  await sequelize.authenticate()
+
+  const Messages = sequelize.define('Message', {
+    message: Sequelize.TEXT,
+  })
+  // creates the Messages table if necessary
+  await Messages.sync()
+
+  return { Messages }
 }

@@ -3,12 +3,10 @@ import Fastify from 'fastify'
 
 const fastify = Fastify({ logger: true })
 
-const client = await initDatabase()
+const { Messages } = await initDatabase()
 
 fastify.get('/messages', async () => {
-  const res = await client.query('SELECT message FROM messages')
-  // only return the message strings
-  const messages = res.rows.map((o) => o.message)
+  const messages = await Messages.findAll()
   console.log('returning %d messages', messages.length)
   return messages
 })
@@ -16,7 +14,7 @@ fastify.get('/messages', async () => {
 fastify.post('/messages', async (req) => {
   const { message } = req.body
   console.log('adding to DB message "%s"', message)
-  await client.query('INSERT INTO messages(message) VALUES ($1)', [message])
+  await Messages.create({ message })
   return { message }
 })
 
