@@ -1,5 +1,3 @@
-/// <reference path="../support/index.d.ts" />
-
 describe('Postgres database', () => {
   beforeEach(() => {
     // delete all existing messages
