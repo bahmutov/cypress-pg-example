@@ -16,14 +16,10 @@ export default defineConfig({
       on('task', {
         clearMessages() {
           // TODO: recreate the Messages table
-          return Messages.sync({ force: true })
         },
 
         async countMessages() {
           // TODO: return the count of records in the Messages table
-          const count = await Messages.count()
-          console.log('found %d messages', count)
-          return count
         },
       })
     },
